@@ -3,7 +3,7 @@
 client_id = "7909d94ff8ac7cf32b6e159743e189e8"
 name = "sync-server-app"
 handle = "sync-server-app"
-application_url = "https://telecommunications-authentication-vol-pix.trycloudflare.com"
+application_url = "https://month-strain-frame-frontpage.trycloudflare.com"
 embedded = true
 
 [build]
@@ -27,9 +27,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://telecommunications-authentication-vol-pix.trycloudflare.com/auth/callback",
-  "https://telecommunications-authentication-vol-pix.trycloudflare.com/auth/shopify/callback",
-  "https://telecommunications-authentication-vol-pix.trycloudflare.com/api/auth/callback"
+  "https://month-strain-frame-frontpage.trycloudflare.com/auth/callback",
+  "https://month-strain-frame-frontpage.trycloudflare.com/auth/shopify/callback",
+  "https://month-strain-frame-frontpage.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]

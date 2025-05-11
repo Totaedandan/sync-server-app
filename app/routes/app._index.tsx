@@ -6,6 +6,25 @@ import { syncProductsWithShopify } from "~/shopify";
 import { authenticate } from "~/shopify.server";
 import { join } from "path";
 import { existsSync, readdirSync } from "fs";
+import {
+  AppProvider,
+  Page,
+  Card,
+  Button,
+  ProgressBar,
+  Text,
+  Frame,
+  Layout,
+} from "@shopify/polaris";
+
+// Minimal i18n configuration
+const i18n = {
+  Polaris: {
+    Frame: {
+      skipToContent: "Skip to content",
+    },
+  },
+};
 
 // Frontend Component
 export default function Index() {
@@ -42,35 +61,52 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md text-center">
-        <h1 className="text-3xl font-bold mb-6 text-gray-800">CGN Product Synchronization</h1>
-        <Form method="post">
-          <button
-            type="submit"
-            onClick={handleSync}
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300"
-          >
-            Faire mise à jour
-          </button>
-        </Form>
-        {showModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md text-center">
-              <h2 className="text-xl font-semibold mb-4 text-gray-700">Mise à jour en cours...</h2>
-              <progress
-                value={progress}
-                max="100"
-                className="w-full h-6 bg-gray-200 rounded-full overflow-hidden"
-              >
-                {progress}%
-              </progress>
-              <p className="mt-2 text-gray-600 font-medium">{progress}%</p>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+    <AppProvider i18n={i18n}>
+      <Frame>
+        <Page title="CGN Product Synchronization">
+          <Layout>
+            <Layout.Section>
+              <Card>
+                <div style={{ padding: '1rem', textAlign: 'center' }}>
+                  <Form method="post">
+                    <Button
+                      variant="primary"
+                      onClick={handleSync}
+                      submit
+                      size="large"
+                      fullWidth
+                    >
+                      Faire mise à jour
+                    </Button>
+                  </Form>
+                </div>
+              </Card>
+            </Layout.Section>
+            {showModal && (
+              <Layout.Section>
+                <Card>
+                  <div style={{ padding: '1rem', textAlign: 'center' }}>
+                    <Text variant="headingMd" as="h2">
+                      Mise à jour en cours...
+                    </Text>
+                  </div>
+                  <div style={{ padding: '1rem', textAlign: 'center' }}>
+                    <ProgressBar
+                      progress={progress}
+                      size="large"
+                      animated
+                    />
+                    <Text variant="bodyMd" as="p" alignment="center">
+                      {progress}%
+                    </Text>
+                  </div>
+                </Card>
+              </Layout.Section>
+            )}
+          </Layout>
+        </Page>
+      </Frame>
+    </AppProvider>
   );
 }
 
